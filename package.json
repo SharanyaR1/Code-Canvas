@@ -1,0 +1,62 @@
+{
+  "name": "code-canvas",
+  "displayName": "Code Canvas",
+  "description": "An open canvas for your coding thoughts. CodeCanvas lets you add dynamic, collapsible notes to your code, organize insights, and annotate key areas with ease.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "code-canvas.openNotesPanel",
+        "title": "Open Code Notes Panel"
+      },
+      {
+        "command": "code-canvas.goToLine",
+        "title": "Go to Line in Code"
+      },
+      {
+        "command": "code-canvas.addNote",
+        "title": "Code Canvas : Add a Note"
+      },
+      {
+        "command": "code-canvas.editNote",
+        "title": "Code Canvas: Edit a Note"
+      }
+    ]
+  },
+  "scripts": {
+    "start": "esbuild --watch --bundle src/extension.ts --outfile=out/extension.js",
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.96.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
+    "esbuild": "^0.24.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.7.2",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
